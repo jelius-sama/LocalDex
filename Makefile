@@ -19,7 +19,7 @@ PORT := $(shell \
 BIN_DIR := ./bin
 ENV := production
 
-.PHONY: build dev archive_prod preview
+.PHONY: build dev deploy_prod preview
 
 build:
 	(cd client && bun run build)

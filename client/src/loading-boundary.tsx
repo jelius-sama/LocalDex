@@ -1,5 +1,5 @@
 import { Fragment, useLayoutEffect, useState, useRef } from "react";
-import Loading from "@/pages/loading";
+import Loading from "@/components/layout/loading";
 import { useLocation, Outlet } from "react-router-dom";
 
 // TODO: Make it work like Suspense fallback on every navigation instead of initial load only.

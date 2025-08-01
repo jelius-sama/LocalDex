@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from "react"
 import { StaticMetadata } from "@/contexts/metadata"
+import UnderDevelopment from "@/components/layout/under-development"
 
 export default function Home() {
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function Home() {
     <Fragment>
       <StaticMetadata />
 
-      <h1>Hello</h1>
+      <UnderDevelopment reminder="Work on Authentication" />
     </Fragment>
   )
 }

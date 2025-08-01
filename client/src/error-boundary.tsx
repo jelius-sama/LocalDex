@@ -1,6 +1,6 @@
-import { Component, type ReactNode, lazy } from "react";
+import { Component, type ReactNode, lazy, Suspense } from "react";
 
-const ClientError = lazy(() => import("@/pages/client-error"))
+const ClientError = lazy(() => import("@/components/layout/client-error"))
 
 interface Props {
   children: ReactNode;
@@ -27,12 +27,12 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   render() {
-    const { hasError } = this.state;
+    const { hasError, error } = this.state;
     const { fallback } = this.props;
 
     if (hasError) {
       return (
-        fallback || <ClientError />
+        fallback || <Suspense><ClientError resetErrorBoundary={null} error={error || new Error("Unexpected client error, error message was unable to be captured!")} /></Suspense>
       );
     }
 

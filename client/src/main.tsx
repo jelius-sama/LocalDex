@@ -8,16 +8,14 @@ import { lazy, Suspense, useLayoutEffect, useEffect, type ReactNode } from 'reac
 import { Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { useConfig } from "@/contexts/config"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import Loading from "@/pages/loading"
+import Loading from "@/components/layout/loading"
 import { ErrorBoundary } from "@/error-boundary"
 import { LoadingBoundary } from "@/loading-boundary"
 
 const queryClient = new QueryClient()
 
 const Home = lazy(() => import("@/pages/home"))
-const ClientError = lazy(() => import("@/pages/client-error"))
-const InternalServerError = lazy(() => import("@/pages/server-error"))
-const NotFound = lazy(() => import("@/pages/not-found"))
+const GenericHTTPError = lazy(() => import("@/components/layout/http-error"))
 const Toaster = lazy(() => import('@/components/ui/sonner'))
 
 let rootEl = document.getElementById('root') as HTMLDivElement | null;
@@ -58,7 +56,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <ErrorBoundary fallback={<ClientError />}>
+      <ErrorBoundary>
         <Suspense fallback={isPriorityPath ? null : <Loading />}>
           {isPriorityPath ? <LoadingBoundary /> : <Outlet />}
         </Suspense>
@@ -101,7 +99,7 @@ const ServerErrorWrapper = ({ comp }: { comp: ReactNode }) => {
     }
   }, [pathname, errorPath])
 
-  return !isSSRLoaded ? <Loading /> : errorPath === pathname ? <InternalServerError /> : comp
+  return !isSSRLoaded ? <Loading /> : errorPath === pathname ? <GenericHTTPError error={"500 - Internal Server Error"} message={"Something broke on my end. If you’re me, fix it now. ⚡"} status={500} /> : comp
 }
 
 export const Authenticate = ({ page }: { page: React.ReactNode }) => {
@@ -128,7 +126,7 @@ export const Authenticate = ({ page }: { page: React.ReactNode }) => {
   }, [])
 
   if (status === "pending") return <Loading />
-  if (status === "error") return <NotFound />
+  if (status === "error") return <GenericHTTPError error={"404 - Page Not Found"} message={"This route does not exists"} status={404} />
 
   return page
 }
@@ -143,7 +141,7 @@ reactRoot.render(
             <Routes>
               <Route path='/' element={<App />}>
                 <Route path='/' element={<ServerErrorWrapper comp={<Home />} />} />
-                <Route path='*' element={<ServerErrorWrapper comp={<NotFound />} />} />
+                <Route path='*' element={<ServerErrorWrapper comp={<GenericHTTPError error={"404 - Page Not Found"} message={"This route does not exists"} status={404} />} />} />
               </Route>
             </Routes>
 
