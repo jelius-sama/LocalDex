@@ -1,0 +1,9 @@
+{
+    "dev_port": "6969",
+    "is_behind_reverse_proxy": {
+        "statement_valid": true,
+        "port_to_use": "7000"
+    },
+    "app_root": "/mnt/NAS/LocalDex",
+    "host": "https://nas.jelius.dev"
+}

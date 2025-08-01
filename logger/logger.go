@@ -50,7 +50,7 @@ func Debug(a ...any) {
 }
 
 func Panic(a ...any) {
-	fmt.Println(append(append([]any{applyStyle("\n\033[31m%s", "PANIC")}, a...), []any{"\033[0m"}...)...)
+	fmt.Fprintln(os.Stderr, append(append([]any{applyStyle("\n\033[31m%s", "PANIC")}, a...), []any{"\033[0m"}...)...)
 	os.Exit(-1)
 }
 

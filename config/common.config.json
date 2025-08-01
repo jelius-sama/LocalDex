@@ -1,0 +1,5 @@
+{
+    "title": "LocalDex",
+    "version": "1.0.0",
+    "description": "A remotely accessible, TLS-encrypted file index service for my NAS, providing authenticated HTTPS access to directory structures and metadata via a web-based interface, contingent on NAS uptime and network availability."
+}

@@ -1,2 +1,12 @@
 bin
 tmp
+client/node_modules
+client/dist
+build
+
+# Ignore everything in the assets folder
+assets/*
+
+# But do not ignore the folder itself (allow it to be part of the repo)
+!assets/manifest.json
+!assets/sw.js

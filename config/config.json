@@ -1,0 +1,13 @@
+{
+    "references": [
+        {
+            "path": "./client.config.json"
+        },
+        {
+            "path": "./server.config.json"
+        },
+        {
+            "path": "./common.config.json"
+        }
+    ]
+}
