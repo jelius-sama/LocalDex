@@ -1,8 +1,21 @@
 import { Fragment, useEffect } from "react"
 import { StaticMetadata } from "@/contexts/metadata"
-import UnderDevelopment from "@/components/layout/under-development"
+import FuckiCloud from "@/components/layout/under-development"
+// import AuthFlow from "@/components/layout/authenticate"
 
 export default function Home() {
+  // const [signedIn, setSignedIn] = useState(false)
+  //
+  // useLayoutEffect(() => {
+  //   (async () => {
+  //     const wasSignedIn = await fetch("/api/auth/status")
+  //
+  //     if (wasSignedIn.ok) {
+  //       setSignedIn(true)
+  //     }
+  //   })()
+  // }, [])
+
   useEffect(() => {
     const handleImageLoad = () => {
       const event = new CustomEvent("PageLoaded", {
@@ -18,7 +31,13 @@ export default function Home() {
     <Fragment>
       <StaticMetadata />
 
-      <UnderDevelopment reminder="Work on Authentication" />
+      <FuckiCloud />
+
+      {/* {signedIn === false ? ( */}
+      {/*   <AuthFlow onSuccess={() => setSignedIn(true)} /> */}
+      {/* ) : ( */}
+      {/*   <p>Signed In</p> */}
+      {/* )} */}
     </Fragment>
   )
 }

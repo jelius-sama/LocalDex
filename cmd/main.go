@@ -134,7 +134,6 @@ func dirExists(dirPath string) error {
 	return fmt.Errorf("error checking directory %s: %w", dirPath, err)
 }
 
-// TODO: Implement authentication/authorization
 func main() {
 	defer db.Conn.Close()
 
