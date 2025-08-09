@@ -69,14 +69,17 @@ dev:
 
 # Files and folders to include in the archive
 deploy_prod:
+	sudo systemctl stop LocalDex
 	@make build -B
 	sudo cp $(BIN_DIR)/$(APP_NAME)-$(VERSION) /usr/local/bin/LocalDex
 	sudo mkdir -p /etc/$(APP_NAME)
 	sudo cp -r ./config /etc/$(APP_NAME)
+	sudo systemctl restart LocalDex.service
 
 .ONESHELL:
 
 preview:
 	# sudo mkdir -p /etc/$(APP_NAME)
 	# sudo cp -r ./config /etc/$(APP_NAME)
-	sudo env $(shell grep -v '^#' /etc/$(APP_NAME)/$(APP_NAME).env | xargs) $(BIN_DIR)/$(APP_NAME)-$(VERSION)
+	# sudo env $(shell grep -v '^#' /etc/$(APP_NAME)/$(APP_NAME).env | xargs) $(BIN_DIR)/$(APP_NAME)-$(VERSION)
+	sudo env $(shell grep -v '^#' /etc/$(APP_NAME)/$(APP_NAME).env | xargs -d '\n') $(BIN_DIR)/$(APP_NAME)-$(VERSION)
